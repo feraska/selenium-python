@@ -218,9 +218,15 @@ def register(e,p,f,l):
         
         submit.click()
         p = driver.find_elements(By.TAG_NAME,"p")[1]
-        WebDriverWait(driver, 30).until(EC.text_to_be_present_in_element(p,"register successfully"))
+       
+        driver.implicitly_wait(30)
+        if not p.text == "register successfully":
+            return False
+        #WebDriverWait(driver, 30).until(EC.text_to_be_present_in_element(driver.find_elements(By.TAG_NAME,"p")[1],"register successfully"))
+        
         return True
     except Exception as e:
+        print(e)
         return False
     #finally:
         #driver.quit()
@@ -230,7 +236,7 @@ def register(e,p,f,l):
     ("","",False),
     ("f.gmail.com","123",False),
     ("feras.94.kasabri@gmail.com","12",False),
-    ("f.gmail.com","123",False)
+    ("f.gmail.com","12",False)
 ],ids=["success","empty","email f","password f","email & password failure"])
 def test_login(a,b,expected):
     assert login(a,b) == expected
@@ -252,8 +258,8 @@ def test_search():
     assert search() == True 
 @pytest.mark.parametrize("e, p, f, l, expected",
     [
-        ("feras.94.kasabri@gmail.com","123","sanad","kasabri",False),
-        ("sanad@gmail.com","123","sanad","kasabri",False),
+        ("feras.94.kasabri@gmail.com","123","feras","kasabri",False),
+        ("feras@gmail.com","123","sanad","kasabri",True),
 
     ],
     ids=["user is found","success"]
