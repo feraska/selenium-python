@@ -20,42 +20,55 @@ cookie = {
     "sameSite": "None",
     
 }
+#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+driver = webdriver.Chrome()
+
+#temp = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+temp = webdriver.Chrome()
+
+
+#driver = webdriver.Chrome()
 # def quit():
 #     driver.quit()
 def login (e,p):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     #driver = webdriver.Chrome()
     try:
-        driver.get("https://netflix-deploy-feraskas-projects.vercel.app/login")
-        
+        driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"login")))
-        driver.implicitly_wait(30)
+        # driver.implicitly_wait(10)
         email = driver.find_element(By.NAME,"email")
         password = driver.find_element(By.NAME,"password")
-
-        email.send_keys(e)
-    
-        password.send_keys(p)
-    
-        submit = driver.find_element(By.TAG_NAME,"button")
         
+        email.send_keys(e)
+        password.send_keys(p)
+        driver.implicitly_wait(10)
+        submit = driver.find_element(By.TAG_NAME,"button")
         submit.click()
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"playing")))
-        return True
-    except Exception as e:
+        
+        # if p.is_displayed:
+        #     return False
+        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"login")))
+        login = driver.find_element(By.CLASS_NAME,"login")
+        container = login.find_element(By.CLASS_NAME,"container")
+        p = container.find_element(By.TAG_NAME,"p")
+        
         return False
+    except Exception as e:
+        return True
     finally:
-        driver.quit()
+        pass
+        #driver.quit()
 def logout():
 
     #driver = webdriver.Chrome()
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     
     try:
-        #driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
+        # driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
         #driver.implicitly_wait(30)
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
         header = driver.find_element(By.TAG_NAME,"header")
@@ -68,12 +81,12 @@ def logout():
         return False
             
 def onMouseOver():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
+        # driver.implicitly_wait(30)
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
         slider = driver.find_element(By.CLASS_NAME,"slider")
         li = slider.find_element(By.TAG_NAME,"li")
@@ -92,12 +105,12 @@ def onMouseOver():
         print(f"error{e}")
         return False
 def play():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
+        # driver.implicitly_wait(30)
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
         slider = driver.find_element(By.CLASS_NAME,"slider")
         li = slider.find_element(By.TAG_NAME,"li")
@@ -114,12 +127,12 @@ def play():
         print(f"error{e}")
         return False
 def addRemove():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
+        #driver.implicitly_wait(10)
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
         slider = driver.find_element(By.CLASS_NAME,"slider")
         li = slider.find_element(By.TAG_NAME,"li")
@@ -136,12 +149,12 @@ def addRemove():
         print(f"error{e}")
         return False
 def likeDislike():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
+        # driver.implicitly_wait(30)
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
         slider = driver.find_element(By.CLASS_NAME,"slider")
         li = slider.find_element(By.TAG_NAME,"li")
@@ -158,13 +171,13 @@ def likeDislike():
         print(f"error{e}")
         return False
 def modal():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
+        # driver.implicitly_wait(30)
+        # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
         slider = driver.find_element(By.CLASS_NAME,"slider")
         li = slider.find_element(By.TAG_NAME,"li")
         img = li.find_element(By.TAG_NAME,"img")
@@ -179,13 +192,13 @@ def modal():
         print(f"error{e}")
         return False
 def search():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+    #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
     try:
-        driver.get("https://nextjs-typescript.onrender.com")
-        driver.add_cookie(cookie)
+        # driver.get("https://nextjs-typescript.onrender.com")
+        # #driver.add_cookie(cookie)
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app")
-        driver.implicitly_wait(30)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
+        # driver.implicitly_wait(30)
+        # WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
         header = driver.find_element(By.TAG_NAME,"header")
         search = header.find_element(By.CSS_SELECTOR,".search > svg")
         
@@ -199,27 +212,27 @@ def search():
         print(f"error{e}")
         return False
 def register(e,p,f,l):
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
-    #driver = webdriver.Chrome()
+    
+    #temp = webdriver.Chrome()
     try:
-        driver.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
-        
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"register")))
-        driver.implicitly_wait(30)
-        email = driver.find_element(By.NAME,"email")
-        password = driver.find_element(By.NAME,"password")
-        firstName = driver.find_element(By.NAME,"firstName")
-        lastName = driver.find_element(By.NAME,"lastName")
+        temp.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
+        WebDriverWait(temp, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"register")))
+        email = temp.find_element(By.NAME,"email")
+        password = temp.find_element(By.NAME,"password")
+        firstName = temp.find_element(By.NAME,"firstName")
+        lastName = temp.find_element(By.NAME,"lastName")
         email.send_keys(e)
         password.send_keys(p)
         firstName.send_keys(f)
         lastName.send_keys(l)
-        submit = driver.find_element(By.TAG_NAME,"button")
+        temp.implicitly_wait(20)
+        submit = temp.find_element(By.TAG_NAME,"button")
         
         submit.click()
-        p = driver.find_elements(By.TAG_NAME,"p")[1]
+        WebDriverWait(temp, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"register")))
+        p = temp.find_elements(By.TAG_NAME,"p")[1]
        
-        driver.implicitly_wait(30)
+        
         if not p.text == "register successfully":
             return False
         #WebDriverWait(driver, 30).until(EC.text_to_be_present_in_element(driver.find_elements(By.TAG_NAME,"p")[1],"register successfully"))
@@ -231,18 +244,23 @@ def register(e,p,f,l):
     #finally:
         #driver.quit()
 # Open a webpage
+@pytest.fixture(scope="session")
+def setup_login():
+    
+    pass
+
 @pytest.mark.parametrize("a, b, expected",[
-    ("feras.94.kasabri@gmail.com", "123" , True),
+    
     ("","",False),
     ("f.gmail.com","123",False),
     ("feras.94.kasabri@gmail.com","12",False),
-    ("f.gmail.com","12",False)
-],ids=["success","empty","email f","password f","email & password failure"])
+    ("f.gmail.com","12",False),
+    ("feras.94.kasabri@gmail.com", "123" , True),
+],ids=["login empty","email f","password f","email & password failure","login success"])
 def test_login(a,b,expected):
+    
     assert login(a,b) == expected
     #driver.quit()
-def test_logout():
-    assert logout() == True
 
 def test_onMouseOver():
     assert onMouseOver() == True
@@ -256,13 +274,22 @@ def test_modal():
     assert modal() == True
 def test_search():
     assert search() == True 
+
+def test_logout():
+    assert logout() == True
+@pytest.fixture(scope="session")
+def setup_register():
+    pass
 @pytest.mark.parametrize("e, p, f, l, expected",
     [
         ("feras.94.kasabri@gmail.com","123","feras","kasabri",False),
         ("feras@gmail.com","123","sanad","kasabri",True),
 
     ],
-    ids=["user is found","success"]
-    )   
+    ids=["user is found","success register"]
+    )
 def test_register(e,p,f,l,expected):
+    
     assert register(e,p,f,l) == expected
+
+    #temp.quit()
