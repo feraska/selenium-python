@@ -49,9 +49,9 @@ def login (e,p):
         # if p.is_displayed:
         #     return False
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"login")))
-        login = driver.find_element(By.CLASS_NAME,"login")
-        container = login.find_element(By.CLASS_NAME,"container")
-        p = container.find_element(By.TAG_NAME,"p")
+        # login = driver.find_element(By.CLASS_NAME,"login")
+        # container = login.find_element(By.CLASS_NAME,"container")
+        # p = container.find_element(By.TAG_NAME,"p")
         
         return False
     except Exception as e:
@@ -92,6 +92,7 @@ def onMouseOver():
         li = slider.find_element(By.TAG_NAME,"li")
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
+        driver.implicitly_wait(10)
         actions.move_to_element(img).perform()
         video = li.find_element(By.CLASS_NAME,"video")
 
@@ -116,12 +117,13 @@ def play():
         li = slider.find_element(By.TAG_NAME,"li")
         img = li.find_element(By.TAG_NAME,"img")
         actions = ActionChains(driver)
+        driver.implicitly_wait(10)
         actions.move_to_element(img).perform()
         buttons = li.find_element(By.CLASS_NAME,"buttons")
         first_child = buttons.find_element(By.XPATH,'./*')
-        
+        driver.implicitly_wait(10)
         actions.click(first_child).perform()
-        WebDriverWait(driver, 30).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/watch/1241982"))
+        WebDriverWait(driver, 30).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/watch/939243"))
         return True
     except Exception as e:
         print(f"error{e}")
@@ -142,6 +144,7 @@ def addRemove():
         buttons = li.find_element(By.CLASS_NAME,"buttons")
         child = buttons.find_elements(By.XPATH,'./*')
         second_child = child[1].find_element(By.CSS_SELECTOR,"div > svg")
+        driver.implicitly_wait(10)
         actions.click(second_child).perform()
         #WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"loading")))
         return True
@@ -164,6 +167,7 @@ def likeDislike():
         buttons = li.find_element(By.CLASS_NAME,"buttons")
         child = buttons.find_elements(By.XPATH,'./*')
         second_child = child[2].find_element(By.CSS_SELECTOR,"div > svg")
+        driver.implicitly_wait(10)
         actions.click(second_child).perform()
         #WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"loading")))
         return True
@@ -184,7 +188,7 @@ def modal():
         actions = ActionChains(driver)
         actions.move_to_element(img).perform()
         info = li.find_element(By.CSS_SELECTOR,".clicks > .tooltip > svg")
-       
+        driver.implicitly_wait(10)
         actions.click(info).perform()
         WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CLASS_NAME,"window")))
         return True
@@ -205,6 +209,7 @@ def search():
         actions = ActionChains(driver)
         actions.click(search).perform()
         input = header.find_element(By.CSS_SELECTOR,".search > input")
+        driver.implicitly_wait(10)
         actions.send_keys_to_element(input,"f").perform()
         #WebDriverWait(driver, 30).until(EC.element_attribute_to_include("f"))
         return True
