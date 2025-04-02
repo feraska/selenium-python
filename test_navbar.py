@@ -63,8 +63,8 @@ def navbar_iconNotification(driver:webdriver.Chrome,fileName:str)->bool:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         notification = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"notification")))
         icon = notification.find_element(By.TAG_NAME,'svg')
-        icon.click()     
-        message = WebDriverWait(notification, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"messsage")))
+        icon.click()   
+        message = WebDriverWait(notification, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"message")))
         screenshot_path = f"navbar_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return message.is_displayed()
