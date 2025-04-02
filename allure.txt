@@ -1,0 +1,8 @@
+How to Run This Test with Allure
+Step 1: Run Tests and Generate Report
+
+pytest --alluredir=allure-results
+
+Step 2: View the Allure Report
+allure serve allure-results
+pytest test_register.py -k test_page//run specific function in py file
