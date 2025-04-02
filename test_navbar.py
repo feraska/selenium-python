@@ -64,7 +64,7 @@ def navbar_iconNotification(driver:webdriver.Chrome,fileName:str)->bool:
         notification = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"notification")))
         icon = notification.find_element(By.TAG_NAME,'svg')
         icon.click()     
-        message = notification.find_element(By.CLASS_NAME,"message")
+        message = WebDriverWait(notification, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"messsage")))
         screenshot_path = f"navbar_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return message.is_displayed()

@@ -59,7 +59,7 @@ def register_success(driver:webdriver.Chrome,fileName:str,firstNameValue:str,las
     ("test4","feras","kasabri","","123",False),
     ("test5","feras","kasabri","feras.94.kasabri@gmail.com","",False),
     ("test6","feras","kasabri","feras.94.kasabri@gmail.com","123",False),
-     ("test7","feras","kasabri","feras@gmail.com","123",False),
+     ("test7","feras","kasabri","feras.94@hotmail.com","123",False),
 ],ids=[
     "all fields is empty",
     "If first name is empty and all this not empty message error",
