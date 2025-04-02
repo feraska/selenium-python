@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pytest
-import allure
+
 import os
 import time
 from cons import cookie
@@ -20,23 +20,23 @@ def setup_driver():
 
 def register_success(driver:webdriver.Chrome,fileName:str,firstNameValue:str,lastNameValue:str,emailValue:str,passwordValue:str)->bool:
     try:
-        with allure.step("Open Netflix register Page"):
-            driver.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
-        with allure.step("Wait for register form"):
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"register")))
-        with allure.step("Enter inputs"):
-            firstName = driver.find_element(By.NAME,"firstName")
-            lastName = driver.find_element(By.NAME,"lastName")
-            email = driver.find_element(By.NAME,"email")
-            password = driver.find_element(By.NAME,"password")
+        
+        driver.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
+        
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"register")))
+        
+        firstName = driver.find_element(By.NAME,"firstName")
+        lastName = driver.find_element(By.NAME,"lastName")
+        email = driver.find_element(By.NAME,"email")
+        password = driver.find_element(By.NAME,"password")
         driver.implicitly_wait(10)  
         firstName.send_keys(firstNameValue)
         lastName.send_keys(lastNameValue)
         email.send_keys(emailValue)
         password.send_keys(passwordValue)
         submit = driver.find_element(By.TAG_NAME,"button")
-        with allure.step("Click register Button"):
-            submit.click()
+        
+        submit.click()
          
         # Wait for URL change
         WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element((By.TAG_NAME,"p"),"register successfully"))
@@ -45,15 +45,12 @@ def register_success(driver:webdriver.Chrome,fileName:str,firstNameValue:str,las
         success_msg = next((p.text for p in p_tags if "register successfully" in p.text), None)
         screenshot_path = f"register_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
-        allure.attach.file(screenshot_path, name="Login Screenshot", attachment_type=allure.attachment_type.PNG)
         return success_msg == "register successfully"
     except Exception as e:
         screenshot_path = screenshot_path = f"register_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
-        allure.attach.file(screenshot_path, name="Login Screenshot Error", attachment_type=allure.attachment_type.PNG)
         return False
-@allure.feature("Register Functionality")
-@allure.story("Valid and Invalid Register Attempts")
+
 @pytest.mark.parametrize("f , firstName, lastName, email, password, expected",[
     
     ("test1","","","","",False),
@@ -80,17 +77,14 @@ def register_page(driver:webdriver.Chrome,fileName:str)->bool:
         # Open website and set cookie
         driver.get("https://nextjs-typescript.onrender.com")
         driver.add_cookie(cookie)
-        with allure.step("Wait for register form"):
-            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
         screenshot_path =  f"register_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
-        allure.attach.file(screenshot_path, name="register Screenshot", attachment_type=allure.attachment_type.PNG)
         return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
     except Exception as e:
         screenshot_path =  f"register_screenshots/{fileName}.png"
         print(driver.current_url)
         driver.save_screenshot(screenshot_path)
-        allure.attach.file(screenshot_path, name="register Screenshot Error", attachment_type=allure.attachment_type.PNG)
         return False
 def test_page(setup_driver):
     assert register_page(setup_driver,"test8") == True
