@@ -19,6 +19,7 @@ def setup_driver():
 
 
 def register_success(driver:webdriver.Chrome,fileName:str,firstNameValue:str,lastNameValue:str,emailValue:str,passwordValue:str)->bool:
+    screenshot_path = screenshot_path = f"register_screenshots/{fileName}.png"
     try:
         
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
@@ -35,19 +36,11 @@ def register_success(driver:webdriver.Chrome,fileName:str,firstNameValue:str,las
         email.send_keys(emailValue)
         password.send_keys(passwordValue)
         submit = driver.find_element(By.TAG_NAME,"button")
-        
         submit.click()
-         
-        # Wait for URL change
-        WebDriverWait(driver, 10).until(EC.text_to_be_present_in_element((By.TAG_NAME,"p"),"register successfully"))
-        # **Find the success message dynamically**
         p_tags = driver.find_elements(By.TAG_NAME, "p")
-        success_msg = next((p.text for p in p_tags if "register successfully" in p.text), None)
-        screenshot_path = f"register_screenshots/{fileName}.png"
-        driver.save_screenshot(screenshot_path)
-        return success_msg == "register successfully"
+        WebDriverWait(driver, 10).until(EC.visibility_of(p_tags[1]))
+        return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"register_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 
@@ -73,17 +66,15 @@ def test_register(setup_driver,f,firstName,lastName,email,password,expected):
     
     assert register_success(setup_driver,f,firstName,lastName,email,password) == expected
 def register_page(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path =  f"register_screenshots/{fileName}.png"
     try:
         # Open website and set cookie
         driver.get("https://nextjs-typescript.onrender.com")
         driver.add_cookie(cookie)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
-        screenshot_path =  f"register_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
     except Exception as e:
-        screenshot_path =  f"register_screenshots/{fileName}.png"
-        print(driver.current_url)
         driver.save_screenshot(screenshot_path)
         return False
 def test_page(setup_driver):

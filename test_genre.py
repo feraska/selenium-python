@@ -23,32 +23,30 @@ def setup_driver():
     # Teardown: Quit the driver after all tests
         driver.quit()
 def genre1(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"genre_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/movies")
         select_element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME,"select")))
         select = Select(select_element)
         select.select_by_index(1)
         WebDriverWait(driver, 20).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/movies?g=28"))
-        screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 
 def genre2(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"genre_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/movies")
         select_element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.TAG_NAME,"select")))
         select = Select(select_element)
         select.select_by_index(2)
         WebDriverWait(driver, 20).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/movies?g=12"))
-        screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 

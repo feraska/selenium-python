@@ -14,6 +14,7 @@ def setup_driver():
     # Teardown: Quit the driver after all tests
         driver.quit()
 def login_success(driver:webdriver.Chrome,fileName:str,emailValue:str,passwordValue:str)->bool:
+    screenshot_path = f"login_screenshots/{fileName}.png"
     try:
             
             driver.get("https://netflix-deploy-feraskas-projects.vercel.app/login")
@@ -32,16 +33,14 @@ def login_success(driver:webdriver.Chrome,fileName:str,emailValue:str,passwordVa
         
             WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
 
-            screenshot_path = f"login_screenshots/{fileName}.png"
             driver.save_screenshot(screenshot_path)
 
             return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
            
     except Exception as e:
-        screenshot_path = screenshot_path = f"login_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
-@pytest.mark.parametrize("f , a, b, expected",[
+@pytest.mark.parametrize("f , email, password, expected",[
     
     ("test1","","",False),
     ("test2","","123",False),
@@ -63,20 +62,17 @@ def login_success(driver:webdriver.Chrome,fileName:str,emailValue:str,passwordVa
     "email is incorrect and the password is correct",
     "email is correct and the password is correct",
        ])
-def test_login(setup_driver,f,a,b,expected):
+def test_login(setup_driver,f,email,password,expected):
     
-    assert login_success(setup_driver,f,a,b) == expected
+    assert login_success(setup_driver,f,email,password) == expected
 def login_page(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path =  f"login_screenshots/{fileName}.png"
     try:
-        
             driver.get("https://netflix-deploy-feraskas-projects.vercel.app/login")
             WebDriverWait(driver, 10).until(EC.url_changes(driver.current_url))  # Wait for URL change
-            screenshot_path =  f"login_screenshots/{fileName}.png"
             driver.save_screenshot(screenshot_path)
             return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
     except Exception as e:
-        
-        screenshot_path =  f"login_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 def test_page(setup_driver):

@@ -6,7 +6,6 @@ import pytest
 import os
 import time
 from cons import cookie
-from cons import cookieN
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
 @pytest.fixture(scope="session")
@@ -23,10 +22,11 @@ def setup_driver():
     # Teardown: Quit the driver after all tests
         driver.quit()
 def onMouseOver(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"cardItem_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         slider = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
-        screenshot_path = f"cardItem_screenshots/{fileName}.png"
+        
         li = WebDriverWait(slider, 20).until(EC.presence_of_element_located((By.TAG_NAME,"li")))
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
@@ -37,16 +37,16 @@ def onMouseOver(driver:webdriver.Chrome,fileName:str)->bool:
         driver.save_screenshot(screenshot_path)
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 
 
 def play(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"cardItem_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         slider = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
-        screenshot_path = f"cardItem_screenshots/{fileName}.png"
+        
         li = WebDriverWait(slider, 20).until(EC.presence_of_element_located((By.TAG_NAME,"li")))
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
@@ -61,14 +61,13 @@ def play(driver:webdriver.Chrome,fileName:str)->bool:
         driver.save_screenshot(screenshot_path)
         return WebDriverWait(driver, 10).until(EC.url_contains('https://netflix-deploy-feraskas-projects.vercel.app/watch/'))
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 def addRemove(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"cardItem_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         slider = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
-        screenshot_path = f"cardItem_screenshots/{fileName}.png"
         li = WebDriverWait(slider, 20).until(EC.presence_of_element_located((By.TAG_NAME,"li")))
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
@@ -84,14 +83,14 @@ def addRemove(driver:webdriver.Chrome,fileName:str)->bool:
         driver.save_screenshot(screenshot_path)
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 def likeDislike(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"cardItem_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         slider = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
-        screenshot_path = f"cardItem_screenshots/{fileName}.png"
+        
         li = WebDriverWait(slider, 20).until(EC.presence_of_element_located((By.TAG_NAME,"li")))
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
@@ -107,18 +106,16 @@ def likeDislike(driver:webdriver.Chrome,fileName:str)->bool:
         driver.save_screenshot(screenshot_path)
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 def modal(driver:webdriver.Chrome,fileName:str)->bool:
+    screenshot_path = f"cardItem_screenshots/{fileName}.png"
     try:
         driver.get("https://netflix-deploy-feraskas-projects.vercel.app/")
         slider = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"slider")))
-        screenshot_path = f"cardItem_screenshots/{fileName}.png"
         li = WebDriverWait(slider, 20).until(EC.presence_of_element_located((By.TAG_NAME,"li")))
         actions = ActionChains(driver)
         img = li.find_element(By.TAG_NAME,"img")
-        
         actions.move_to_element(img).perform()
         video = WebDriverWait(li, 20).until(EC.presence_of_element_located((By.CLASS_NAME,"video")))
 
@@ -130,7 +127,6 @@ def modal(driver:webdriver.Chrome,fileName:str)->bool:
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME,"window")))
         return True
     except Exception as e:
-        screenshot_path = screenshot_path = f"genre_screenshots/{fileName}.png"
         driver.save_screenshot(screenshot_path)
         return False
 def test_mouseOver(setup_driver):
