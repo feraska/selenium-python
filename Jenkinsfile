@@ -31,24 +31,24 @@ pipeline {
                  '''
             }
         }
-         stage('Generate Allure Report') {
-            steps {
-                sh '''
-                    mkdir -p allure-report
-                    allure generate allure-results --clean -o allure-report
-                '''
-            }
-        }
+        //  stage('Generate Allure Report') {
+        //     steps {
+        //         sh '''
+        //             mkdir -p allure-report
+        //             allure generate allure-results --clean -o allure-report
+        //         '''
+        //     }
+        // }
 
-        stage('Publish Allure Report') {
-            steps {
-                allure(
-                includeProperties: false, 
-                jdk: '',
-                results: [[path: 'allure-report']]
-                )
-            }
-        }
+        // stage('Publish Allure Report') {
+        //     steps {
+        //         allure(
+        //         includeProperties: false, 
+        //         jdk: '',
+        //         results: [[path: 'allure-report']]
+        //         )
+        //     }
+        // }
 
        
     }
