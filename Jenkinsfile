@@ -23,21 +23,11 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'pytest --alluredir=allure-results'
+                sh 'pytest '
             }
         }
 
-        stage('Generate Allure Report') {
-            steps {
-                sh 'allure generate allure-results --clean -o allure-report'
-            }
-        }
-
-        stage('Publish Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
-        }
+       
     }
 
     post {
