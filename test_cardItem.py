@@ -11,10 +11,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 @pytest.fixture(scope="session")
 def setup_driver():
-         #options = Options()
-        #  options.add_argument("--headless")  # Run tests without UI
-        #  options.add_argument("--no-sandbox")
-        #  options.add_argument("--disable-dev-shm-usage")
+         options = Options()
+         options.add_argument("--headless")  # Run tests without UI
+         options.add_argument("--no-sandbox")
+         options.add_argument("--disable-dev-shm-usage")
 
          selenium_grid_url =  url # Change based on your container setup
          driver = webdriver.Remote(command_executor=selenium_grid_url)
