@@ -17,7 +17,7 @@ def setup_driver():
          options.add_argument("--disable-dev-shm-usage")
 
          selenium_grid_url =  url # Change based on your container setup
-         driver = webdriver.Remote(command_executor=selenium_grid_url)
+         driver = webdriver.Remote(command_executor=selenium_grid_url,options=options)
          #driver = webdriver.Remote(command_executor=selenium_grid_url, options=options)
         #driver  = webdriver.Chrome()
      # Create the folder if it doesn't exist
