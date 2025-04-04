@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         SELENIUM_GRID_URL = "https://pfjlhx5t-4444.euw.devtunnels.ms/"  // Use the container name
-        SLACK_CHANNEL = 'general'  // Set your Slack channel here
-        SLACK_COLOR_SUCCESS = 'good'  // Color code for success messages (green)
-        SLACK_COLOR_FAILURE = 'danger'  // Color code for failure messages (red)
+        // SLACK_CHANNEL = 'general'  // Set your Slack channel here
+        // SLACK_COLOR_SUCCESS = 'good'  // Color code for success messages (green)
+        // SLACK_COLOR_FAILURE = 'danger'  // Color code for failure messages (red)
     }
 
     stages {
@@ -40,11 +40,11 @@ pipeline {
             }
         }
 
-        // stage('Publish Allure Report') {
-        //     steps {
-        //         allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-        //     }
-        // }
+        stage('Publish Allure Report') {
+            steps {
+                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+            }
+        }
 
        
     }
