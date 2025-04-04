@@ -11,15 +11,6 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/feraska/selenium-python.git'
             }
         }
-         stage('Install Python and pip') {
-            steps {
-                sh '''
-                    apt-get update
-                    apt-get install -y python3 python3-pip
-                '''
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'pip install -r requirements.txt'
