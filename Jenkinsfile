@@ -13,7 +13,10 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'apt install python3--r requirements.txt'
+                sh '''
+                    source venv/bin/activate
+                    pip3 install -r requirements.txt
+                    '''
             }
         }
 
