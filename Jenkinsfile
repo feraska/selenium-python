@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh '''
                     mkdir -p allure-report
-                    venv/bin/allure generate allure-results --clean -o allure-report
+                    allure generate allure-results --clean -o allure-report
                 '''
             }
         }
