@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SELENIUM_GRID_URL = "https://pfjlhx5t-4444.euw.devtunnels.ms/ui/"  // Use the container name
+        SELENIUM_GRID_URL = "https://pfjlhx5t-4444.euw.devtunnels.ms/"  // Use the container name
     }
 
     stages {
