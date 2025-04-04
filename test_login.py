@@ -77,10 +77,12 @@ def test_login(setup_driver,f,email,password,expected):
 def login_page(driver:webdriver.Chrome,fileName:str)->bool:
     screenshot_path =  f"login_screenshots/{fileName}.png"
     try:
+            driver.get("https://nextjs-typescript.onrender.com")
+            driver.add_cookie(cookie)
             driver.get("https://netflix-deploy-feraskas-projects.vercel.app/login")
-            WebDriverWait(driver, 10).until(EC.url_changes(driver.current_url))  # Wait for URL change
+            WebDriverWait(driver, 10).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/"))  # Wait for URL change
             driver.save_screenshot(screenshot_path)
-            return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
+            return True
     except Exception as e:
         driver.save_screenshot(screenshot_path)
         return False

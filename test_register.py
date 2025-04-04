@@ -79,9 +79,10 @@ def register_page(driver:webdriver.Chrome,fileName:str)->bool:
         # Open website and set cookie
         driver.get("https://nextjs-typescript.onrender.com")
         driver.add_cookie(cookie)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME,"header")))
+        driver.get("https://netflix-deploy-feraskas-projects.vercel.app/register")
+        WebDriverWait(driver, 10).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/"))  # Wait for URL change
         driver.save_screenshot(screenshot_path)
-        return driver.current_url == 'https://netflix-deploy-feraskas-projects.vercel.app/'
+        return True
     except Exception as e:
         driver.save_screenshot(screenshot_path)
         return False
