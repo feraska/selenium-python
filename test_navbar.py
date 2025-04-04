@@ -7,12 +7,18 @@ import os
 import time
 from cons import cookie,url
 from cons import cookieN
+from selenium.webdriver.chrome.options import Options
 @pytest.fixture(scope="session")
 def setup_driver():
         
         #driver  = webdriver.Chrome()
+        options = Options()
+        options.add_argument("--headless")  # Run tests without UI
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+
         selenium_grid_url =  url # Change based on your container setup
-        driver = webdriver.Remote(command_executor=selenium_grid_url)
+        driver = webdriver.Remote(command_executor=selenium_grid_url,options=options)
      # Create the folder if it doesn't exist
         os.makedirs("navbar_screenshots", exist_ok=True)
         driver.get("https://nextjs-typescript.onrender.com")
