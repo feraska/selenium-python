@@ -35,38 +35,38 @@ pipeline {
             steps {
                 sh '''
                     mkdir -p allure-report
-                    allure generate allure-results --clean -o allure-report
+                    venv/bin/allure generate allure-results --clean -o allure-report
                 '''
             }
         }
 
-        stage('Publish Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-            }
-        }
+        // stage('Publish Allure Report') {
+        //     steps {
+        //         allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+        //     }
+        // }
 
        
     }
 
     post {
-        success {
-            script {
-                slackSend(channel: SLACK_CHANNEL, color: SLACK_COLOR_SUCCESS, message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
-            }
-        }
+        // success {
+        //     script {
+        //         slackSend(channel: SLACK_CHANNEL, color: SLACK_COLOR_SUCCESS, message: "Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
+        //     }
+        // }
 
-        failure {
-            script {
-                slackSend(channel: SLACK_CHANNEL, color: SLACK_COLOR_FAILURE, message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
-            }
-        }
+        // failure {
+        //     script {
+        //         slackSend(channel: SLACK_CHANNEL, color: SLACK_COLOR_FAILURE, message: "Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
+        //     }
+        // }
 
-        unstable {
-            script {
-                slackSend(channel: SLACK_CHANNEL, color: 'warning', message: "Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
-            }
-        }
+        // unstable {
+        //     script {
+        //         slackSend(channel: SLACK_CHANNEL, color: 'warning', message: "Build Unstable: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${env.BUILD_URL}")
+        //     }
+        // }
         always {
             echo 'Pipeline execution completed.'
         }
