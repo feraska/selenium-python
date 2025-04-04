@@ -33,7 +33,7 @@ def tologin(driver:webdriver.Chrome,fileName:str)->bool:
       screenshot_path = f"watch_screenshots/{fileName}.png"
       try:
             driver.delete_cookie("access_token")
-            driver.get("https://netflix-deploy-feraskas-projects.vercel.app/watch")
+            driver.get("https://netflix-deploy-feraskas-projects.vercel.app/watch/1")
             WebDriverWait(driver, 10).until(EC.url_to_be("https://netflix-deploy-feraskas-projects.vercel.app/login"))  # Wait for URL change
             driver.save_screenshot(screenshot_path)
             return True
