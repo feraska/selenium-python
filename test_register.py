@@ -8,7 +8,7 @@ import os
 import time
 from cons import cookie,url
 from selenium.webdriver.chrome.options import Options
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def setup_driver():
         options = Options()
         options.add_argument("--headless")  # Run tests without UI

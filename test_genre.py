@@ -9,7 +9,7 @@ from cons import cookie,url
 from cons import cookieN
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.chrome.options import Options
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def setup_driver():
         
         #driver  = webdriver.Chrome()
