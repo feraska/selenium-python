@@ -6,10 +6,12 @@ import pytest
 
 import os
 import time
-from cons import cookie
+from cons import cookie,url
 @pytest.fixture(scope="session")
 def setup_driver():
-        driver = webdriver.Chrome()
+        selenium_grid_url =  url # Change based on your container setup
+        driver = webdriver.Remote(command_executor=selenium_grid_url)
+        #driver = webdriver.Chrome()
      # Create the folder if it doesn't exist
         os.makedirs("navbar_screenshots", exist_ok=True)
         yield driver  # Return the WebDriver instance to the tests

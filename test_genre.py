@@ -5,14 +5,16 @@ from selenium.webdriver.common.by import By
 import pytest
 import os
 import time
-from cons import cookie
+from cons import cookie,url
 from cons import cookieN
 from selenium.webdriver.support.select import Select
 
 @pytest.fixture(scope="session")
 def setup_driver():
         
-        driver  = webdriver.Chrome()
+        #driver  = webdriver.Chrome()
+        selenium_grid_url =  url # Change based on your container setup
+        driver = webdriver.Remote(command_executor=selenium_grid_url)
      # Create the folder if it doesn't exist
         os.makedirs("genre_screenshots", exist_ok=True)
         driver.get("https://nextjs-typescript.onrender.com")

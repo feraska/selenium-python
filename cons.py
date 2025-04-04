@@ -17,3 +17,4 @@ cookieN = {
     "secure": True,
     "sameSite": "None",
 }
+url = "https://pfjlhx5t-4444.euw.devtunnels.ms"

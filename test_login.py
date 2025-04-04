@@ -4,9 +4,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import pytest
 import os
+from cons import cookie,url
 @pytest.fixture(scope="session")
 def setup_driver():
-        driver = webdriver.Chrome()
+        #driver = webdriver.Chrome()
+        selenium_grid_url =  url # Change based on your container setup
+        driver = webdriver.Remote(command_executor=selenium_grid_url)
      # Create the folder if it doesn't exist
         os.makedirs("login_screenshots", exist_ok=True)
         yield driver  # Return the WebDriver instance to the tests
