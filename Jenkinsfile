@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                 
-                venv/bin/python pytest -v
+                venv/bin/python -m pytest -v
                  '''
             }
         }
