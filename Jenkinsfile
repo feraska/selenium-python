@@ -11,11 +11,11 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/feraska/selenium-python.git'
             }
         }
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip3 install -r requirements.txt'
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         sh 'pip3 install -r requirements.txt'
+        //     }
+        // }
 
         stage('Run Tests') {
             steps {
