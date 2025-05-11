@@ -5,9 +5,7 @@ pipeline {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
     }
-    tools {
-        SonarQubeScanner  'SonarScanner' // Must match the name in Global Tool Config
-    }
+   
 
     stages {
         stage('Checkout Code') {
