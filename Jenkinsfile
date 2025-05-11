@@ -38,12 +38,17 @@ pipeline {
                         sonar-scanner \
                         -Dsonar.projectKey=selenium-python \
                         -Dsonar.sources=. \
-                        -Dsonar.python.coverage.reportPaths=htmlcov \
-                        -Dsonar.sourceEncoding=UTF-8
+                        -Dsonar.sourceEncoding=UTF-8 > sonar-scanner.log 2>&1
+                        cat sonar-scanner.log
                     '''
                 }
             }
         }
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true
+    }
+}
        
        
     }
