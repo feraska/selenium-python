@@ -6,7 +6,7 @@ pipeline {
         
     }
     tools {
-        sonarScanner 'SonarScanner' // Must match the name in Global Tool Config
+        SonarQubeScanner  'SonarScanner' // Must match the name in Global Tool Config
     }
 
     stages {
@@ -32,7 +32,7 @@ pipeline {
                  '''
             }
         }
-        
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
