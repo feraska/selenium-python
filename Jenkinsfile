@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'sonarsource/sonar-scanner-cli'
-        }
-    }
+    agent any
     environment {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         SONARQUBE_ENV = credentials('sonarqube-token') // Jenkins credential ID if needed
@@ -35,6 +31,11 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
+             agent {
+                docker {
+                    image 'sonarsource/sonar-scanner-cli'
+                }
+            }
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
