@@ -5,6 +5,9 @@ pipeline {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
     }
+    tools {
+        sonarScanner 'SonarScanner' // Must match the name in Global Tool Config
+    }
 
     stages {
         stage('Checkout Code') {
@@ -27,6 +30,20 @@ pipeline {
                 
                 venv/bin/python -m pytest --cov=. --cov-report=html --cov-report=term-missing --alluredir=allure-results -v
                  '''
+            }
+        }
+        
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        sonar-scanner \
+                        -Dsonar.projectKey=selenium-python \
+                        -Dsonar.sources=. \
+                        -Dsonar.python.coverage.reportPaths=htmlcov \
+                        -Dsonar.sourceEncoding=UTF-8
+                    '''
+                }
             }
         }
        
