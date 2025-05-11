@@ -13,24 +13,6 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/feraska/selenium-python.git'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        sonar-scanner \
-                        -Dsonar.projectKey=selenium-python \
-                        -Dsonar.sources=. \
-                        -Dsonar.sourceEncoding=UTF-8 > sonar-scanner.log 2>&1
-                        cat sonar-scanner.log
-                    '''
-                }
-            }
-        }
-        stage('Quality Gate') {
-            steps {
-                waitForQualityGate abortPipeline: true
-    }
-}
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -49,7 +31,24 @@ pipeline {
             }
         }
 
-        
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        sonar-scanner \
+                        -Dsonar.projectKey=selenium-python \
+                        -Dsonar.sources=. \
+                        -Dsonar.sourceEncoding=UTF-8 > sonar-scanner.log 2>&1
+                        cat sonar-scanner.log
+                    '''
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true
+    }
+}
        
        
     }
