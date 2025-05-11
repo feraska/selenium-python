@@ -35,6 +35,9 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
+                script {
+                    echo "Using SonarQube token: ${env.SONARQUBE_ENV}"
+                }
                 withSonarQubeEnv('SonarQube') {
                    sh '''
                 sonar-scanner \
