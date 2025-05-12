@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    tools {
+        sonarQube 'sonarQubeScanner' // This must match the name you gave in Global Tool Configuration
+    }
     environment {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
