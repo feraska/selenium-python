@@ -20,13 +20,13 @@ pipeline {
                                 sh """
                                     docker run --rm \
                                     --network jenkins-grid-network \
-                                    -e SONAR_TOKEN=${SONAR_TOKEN} \
                                     -v "\$PWD":/app \
                                     -w /app \
                                     sonarsource/sonar-scanner-cli \
                                     -Dsonar.projectKey=my-project \
                                     -Dsonar.sources=. \
                                     -Dsonar.host.url=${SONAR_HOST_URL}
+                                    -Dsonar.login=${SONAR_TOKEN}
                                 """
                             }
                         } catch (Exception e) {
