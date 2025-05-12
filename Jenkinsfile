@@ -26,14 +26,12 @@ pipeline {
                 
                 withSonarQubeEnv('sonarServer') {
                 script {
-               docker.image('sonarsource/sonar-scanner-cli').inside {
-                    sh '''
-                        sonar-scanner \
-                            -Dsonar.projectKey=my-project \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=http://sonarqube:9000 \
-                    '''
-                }
+                sh '''
+                            sonar-scanner \
+                                -Dsonar.projectKey=my-project \
+                                -Dsonar.sources=. \
+                                -Dsonar.host.url=http://sonarqube:9000
+                        '''
             }
         }
         }
