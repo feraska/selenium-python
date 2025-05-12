@@ -2,7 +2,7 @@ pipeline {
     agent any
      environment {
         SONAR_HOST_URL = 'http://sonarqube:9000'
-        SONAR_LOGIN = 'your-sonar-token' // أو استخدم credentials إذا تفضل
+        SONAR_TOKEN = credentials('sonar-token') 
     }
     stages {
         stage('Checkout Code') {
@@ -21,7 +21,7 @@ pipeline {
                     -Dsonar.projectKey=my-project \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=$SONAR_HOST_URL \
-                    
+                    -Dsonar.login=$SONAR_TOKEN
                 '''
                 }
             }
