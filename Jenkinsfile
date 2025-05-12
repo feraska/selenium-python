@@ -22,7 +22,7 @@ pipeline {
                     -Dsonar.projectKey=my-project \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=${SONAR_HOST_URL} \
-                    -Dsonar.login=${SONAR_TOKEN}
+                    -Dsonar.login=\$SONAR_TOKEN
                     """
                 }
             }
