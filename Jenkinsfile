@@ -64,7 +64,7 @@ pipeline {
                 script {
                     // تشغيل الحاوية التي تم إنشاؤها
                     app.inside {
-                       
+                       sh 'python -m pytest --cov=. --cov-report=html --cov-report=term-missing --alluredir=allure-results -v'
                     }
                 }
             }
