@@ -9,7 +9,11 @@ pipeline {
    
 
     stages {
-       
+        stage('Checkout Code') {
+            steps {
+                git branch: 'master', url: 'https://github.com/feraska/selenium-python.git'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -20,7 +24,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
         
-    
+    }
             steps {
                 
                 withSonarQubeEnv('sonarServer') {
