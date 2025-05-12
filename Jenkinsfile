@@ -26,7 +26,6 @@ pipeline {
                                     sonarsource/sonar-scanner-cli \
                                     -Dsonar.projectKey=selenium-python \
                                     -Dsonar.sources=. \
-                                    -Dsonar.branch.name=master \
                                     -Dsonar.host.url=${SONAR_HOST_URL} \
                                     -Dsonar.token=${SONAR_TOKEN}
                                 """
