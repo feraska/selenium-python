@@ -12,7 +12,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarServer') {
+                //withSonarQubeEnv('sonarServer') {
                 script {
                         try {
                             // تمرير SONAR_TOKEN عبر البيئة لتجنب التحذير
@@ -33,7 +33,7 @@ pipeline {
                             error("SonarQube analysis failed: ${e.getMessage()}")
                         }
                     }
-            }
+           // }
         }
         }
 
