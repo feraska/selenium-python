@@ -10,11 +10,16 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarServer') {
-                    sh 'sonar-scanner \
-                        -Dsonar.projectKey=my-project \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://sonarqube:9000 \
-                      '  
+                    sh '''
+                docker run --rm \
+                    --network --network jenkins-grid \
+                    -v "$PWD":/usr/src \
+                    sonarsource/sonar-scanner-cli \
+                    -Dsonar.projectKey=my-project \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=$SONAR_HOST_URL \
+                    
+                '''
                 }
             }
         }
