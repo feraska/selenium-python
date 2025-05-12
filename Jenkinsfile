@@ -14,7 +14,7 @@ pipeline {
                         -Dsonar.projectKey=my-project \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://sonarqube:9000 \
-                        
+                      '  
                 }
             }
         }
