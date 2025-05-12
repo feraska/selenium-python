@@ -1,3 +1,4 @@
+def app  // تعريف المتغير هنا
 pipeline {
     agent any
      environment {
@@ -53,7 +54,7 @@ pipeline {
             steps {
                 script {
                     // بناء الصورة باستخدام Dockerfile
-                    def app = docker.build('my-python-app')
+                     app = docker.build('my-python-app')
                 }
             }
         }
