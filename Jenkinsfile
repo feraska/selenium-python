@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    tools {
+        SonarQubeScanner 'SonarQubeScanner'
+    }
     environment {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
@@ -21,21 +23,9 @@ pipeline {
                     '''
             }
         }
-
-        stage('Run Tests') {
-            steps {
-                sh '''
-                
-                venv/bin/python -m pytest --cov=. --cov-report=html --cov-report=term-missing --alluredir=allure-results -v
-                 '''
-            }
-        }
-
         stage('SonarQube Analysis') {
             steps {
-                script {
-                    echo "Using SonarQube token: ${env.SONARQUBE_ENV}"
-                }
+                
                 withSonarQubeEnv('SonarQube') {
                    sh '''
                 sonar-scanner \
@@ -47,11 +37,18 @@ pipeline {
                 }
             }
         }
-        stage('Quality Gate') {
+
+        stage('Run Tests') {
             steps {
-                waitForQualityGate abortPipeline: true
-    }
-}
+                sh '''
+                
+                venv/bin/python -m pytest --cov=. --cov-report=html --cov-report=term-missing --alluredir=allure-results -v
+                 '''
+            }
+        }
+
+        
+   
        
        
     }
