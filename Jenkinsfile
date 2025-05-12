@@ -25,6 +25,7 @@ pipeline {
             steps {
                 
                 withSonarQubeEnv('sonarServer') {
+                script {
                docker.image('sonarsource/sonar-scanner-cli').inside {
                     sh '''
                         sonar-scanner \
@@ -34,6 +35,7 @@ pipeline {
                     '''
                 }
             }
+        }
         }
         }
 
