@@ -25,17 +25,16 @@ pipeline {
             steps {
                 
                 withSonarQubeEnv('sonarServer') {
-                   sh '''
-                docker run --rm \
-                -v "$(pwd):/usr/src" \
-                sonarsource/sonar-scanner-cli \
-                -Dsonar.projectKey=my-project \
-                -Dsonar.sources=/usr/src \
-                -Dsonar.host.url=http://sonarqube:9000 \
-                    
-            '''
+               docker.image('sonarsource/sonar-scanner-cli').inside {
+                    sh '''
+                        sonar-scanner \
+                            -Dsonar.projectKey=my-project \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://sonarqube:9000 \
+                    '''
                 }
             }
+        }
         }
 
         stage('Run Tests') {
