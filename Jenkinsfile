@@ -5,9 +5,7 @@ pipeline {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
     }
-    tools {
-        sonarScanner 'sonarQubeScanner'  // Reference the SonarQube tool you configured in Jenkins
-    }
+
    
 
     stages {
