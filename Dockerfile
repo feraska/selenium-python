@@ -1,10 +1,5 @@
-FROM jenkins/jenkins
-
-# Switch to root user to install necessary packages
-USER root
-
-# Update package list and install Python and pip
-RUN apt-get update && apt-get install -y python3 python3-venv python3-pip
-
-# Switch back to the Jenkins user after installation
-USER jenkins
+FROM python
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python","-m","pytest", "--cov=.","--cov-report=html","--cov-report=term-missing","--alluredir=allure-results -v"]
