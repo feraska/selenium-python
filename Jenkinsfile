@@ -13,19 +13,28 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarServer') {
-                    sh '''
-                docker run --rm \
+                sh """
+                    docker run --rm \
                     --network jenkins-grid-network \
-                    -v "$PWD":/usr/src \
+                    -v "\$PWD":/app \
+                    -w /app \
                     sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=my-project \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=$SONAR_HOST_URL \
-                    -Dsonar.login=$SONAR_TOKEN
-                '''
+                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                    -Dsonar.login=${SONAR_TOKEN}
+                    """
                 }
             }
         }
+
+        stage('Quality Gate') {
+    steps {
+        timeout(time: 1, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
        
         stage('Build and Run') {
             steps {
