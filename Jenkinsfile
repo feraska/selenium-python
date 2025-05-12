@@ -13,19 +13,28 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarServer') {
-                sh """
-                    docker run --rm \
-                    --network jenkins-grid-network \
-                    -e SONAR_TOKEN=${SONAR_TOKEN} \
-                    -v "\$PWD":/app \
-                    -w /app \
-                    sonarsource/sonar-scanner-cli \
-                    -Dsonar.projectKey=my-project \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=${SONAR_HOST_URL} \
-                    """
-                }
+                script {
+                        try {
+                            // تمرير SONAR_TOKEN عبر البيئة لتجنب التحذير
+                            withEnv(["SONAR_TOKEN=${SONAR_TOKEN}"]) {
+                                sh """
+                                    docker run --rm \
+                                    --network jenkins-grid-network \
+                                    -e SONAR_TOKEN=${SONAR_TOKEN} \
+                                    -v "\$PWD":/app \
+                                    -w /app \
+                                    sonarsource/sonar-scanner-cli \
+                                    -Dsonar.projectKey=my-project \
+                                    -Dsonar.sources=. \
+                                    -Dsonar.host.url=${SONAR_HOST_URL}
+                                """
+                            }
+                        } catch (Exception e) {
+                            error("SonarQube analysis failed: ${e.getMessage()}")
+                        }
+                    }
             }
+        }
         }
 
         stage('Quality Gate') {
