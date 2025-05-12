@@ -42,12 +42,34 @@ pipeline {
 
    
        
-        stage('Build and Run') {
+        // stage('Build and Run') {
+        //     steps {
+        //         sh 'docker build -t my-python-app .'
+        //         sh 'docker run --rm --network jenkins-grid-network my-python-app'
+        //     }
+        // }
+
+            stage('Build Docker Image') {
             steps {
-                sh 'docker build -t my-python-app .'
-                sh 'docker run --rm --network jenkins-grid-network my-python-app'
+                script {
+                    // بناء الصورة باستخدام Dockerfile
+                    def app = docker.build('my-python-app')
+                }
             }
         }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // تشغيل الحاوية التي تم إنشاؤها
+                    app.inside {
+                       
+                    }
+                }
+            }
+        }
+    
+
 
 
         
