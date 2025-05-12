@@ -1,4 +1,3 @@
-def app  // تعريف المتغير هنا
 pipeline {
     agent any
      environment {
@@ -43,34 +42,18 @@ pipeline {
 
    
        
-        // stage('Build and Run') {
-        //     steps {
-        //         sh 'docker build -t my-python-app .'
-        //         sh 'docker run --rm --network jenkins-grid-network my-python-app'
-        //     }
-        // }
-
-            stage('Build Docker Image') {
+        stage('Build') {
             steps {
-                script {
-                    // بناء الصورة باستخدام Dockerfile
-                     app = docker.build('my-python-app')
-                }
+                sh 'docker build -t my-python-app .'
+                
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Run') {
             steps {
-                script {
-                    // تشغيل الحاوية التي تم إنشاؤها
-                    app.inside {
-                       sh 'python -m pytest --cov=. --cov-report=html --cov-report=term-missing --alluredir=allure-results -v'
-                    }
-                }
+                sh 'docker run --rm --network jenkins-grid-network my-python-app'
             }
         }
-    
-
 
 
         
