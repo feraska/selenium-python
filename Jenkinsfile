@@ -17,6 +17,7 @@ pipeline {
                         try {
                             // تمرير SONAR_TOKEN عبر البيئة لتجنب التحذير
                             withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')])  {
+                                sh "echo $SONAR_TOKEN"
                                 sh """
                                     docker run --rm \
                                     --network jenkins-grid-network \
@@ -26,7 +27,7 @@ pipeline {
                                     -Dsonar.projectKey=selenium-python \
                                     -Dsonar.sources=. \
                                     -Dsonar.host.url=${SONAR_HOST_URL} \
-                                    -Dsonar.login=${SONAR_TOKEN}
+                                    -Dsonar.login=$SONAR_TOKEN}
                                 """
                             }
                         }
