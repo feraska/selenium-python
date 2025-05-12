@@ -16,7 +16,7 @@ pipeline {
                 script {
                         try {
                             // تمرير SONAR_TOKEN عبر البيئة لتجنب التحذير
-                            withEnv(["SONAR_TOKEN=${SONAR_TOKEN}"]) {
+                            withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')])  {
                                 sh """
                                     docker run --rm \
                                     --network jenkins-grid-network \
