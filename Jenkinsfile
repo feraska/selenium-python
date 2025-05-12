@@ -2,7 +2,7 @@ pipeline {
     agent any
      environment {
         SONAR_HOST_URL = 'http://sonarqube:9000'
-        SONAR_TOKEN = credentials('sonarqube-token') 
+        //SONAR_TOKEN = credentials('sonarqube-token') 
     }
     stages {
         stage('Checkout Code') {
@@ -16,17 +16,17 @@ pipeline {
                 script {
                         try {
                             // تمرير SONAR_TOKEN عبر البيئة لتجنب التحذير
-                            //withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')])  {
+                            withCredentials([string(credentialsId: 'jenkins-token', variable: 'SONAR_TOKEN')])  {
                                 sh """
                                     docker run --rm \
                                     --network jenkins-grid-network \
                                     -v "\$PWD":/app \
                                     -w /app \
                                     sonarsource/sonar-scanner-cli \
-                                    -Dsonar.projectKey=${GIT_COMMIT} \
+                                    -Dsonar.projectKey=selenium-python \
                                     -Dsonar.sources=. \
-                                    -Dsonar.host.url=$SONAR_HOST_URL \
-                                    -Dsonar.login=$SONAR_TOKEN
+                                    -Dsonar.host.url=${SONAR_HOST_URL} \
+                                    -Dsonar.login=${SONAR_TOKEN}
                                 """
                             }
                          catch (Exception e) {
@@ -34,6 +34,7 @@ pipeline {
                         }
                     }
             }
+        }
         }
         }
 
