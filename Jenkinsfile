@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/feraska/selenium-python.git'
+                checkout scm
             }
         }
         stage('Install Dependencies') {
