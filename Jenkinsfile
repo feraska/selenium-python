@@ -15,7 +15,7 @@ pipeline {
                 withSonarQubeEnv('sonarServer') {
                     sh '''
                 docker run --rm \
-                    --network jenkins-grid \
+                    --network jenkins-grid-network \
                     -v "$PWD":/usr/src \
                     sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=my-project \
