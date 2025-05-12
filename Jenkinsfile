@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    tools {
-        sonarRunner 'sonarQubeScanner' // This must match the name you gave in Global Tool Configuration
-    }
+   
     environment {
         SELENIUM_GRID_URL = "http://selenium-grid:4444"  // Use the container name
         
@@ -28,10 +26,12 @@ pipeline {
                 
                 withSonarQubeEnv('sonarServer') {
                    sh '''
-                sonar-scanner \
-                    -Dsonar.projectKey=my-project \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://sonarqube:9000 \
+                docker run --rm \
+                -v "$(pwd):/usr/src" \
+                sonarsource/sonar-scanner-cli \
+                -Dsonar.projectKey=my-project \
+                -Dsonar.sources=/usr/src \
+                -Dsonar.host.url=http://sonarqube:9000 \
                     
             '''
                 }
