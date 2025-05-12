@@ -23,7 +23,7 @@ pipeline {
                                     -v "\$PWD":/app \
                                     -w /app \
                                     sonarsource/sonar-scanner-cli \
-                                    -Dsonar.projectKey=my-project \
+                                    -Dsonar.projectKey=${GIT_COMMIT} \
                                     -Dsonar.sources=. \
                                     -Dsonar.host.url=${SONAR_HOST_URL} \
                                     -Dsonar.login=${SONAR_TOKEN}
