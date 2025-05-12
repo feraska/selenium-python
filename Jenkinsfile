@@ -7,6 +7,17 @@ pipeline {
                 checkout scm
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner \
+                        -Dsonar.projectKey=my-project \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://sonarqube:9000 \
+                        
+                }
+            }
+        }
        
         stage('Build and Run') {
             steps {
@@ -14,6 +25,7 @@ pipeline {
                 sh 'docker run --rm --network jenkins-grid-network my-python-app'
             }
         }
+
 
         
    
