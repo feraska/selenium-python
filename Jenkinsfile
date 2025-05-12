@@ -11,7 +11,7 @@ pipeline {
         stage('Build and Run') {
             steps {
                 sh 'docker build -t my-python-app .'
-                sh 'docker run --rm my-python-app'
+                sh 'docker run --rm --network jenkins-grid-network my-python-app'
             }
         }
 
