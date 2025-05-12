@@ -24,10 +24,10 @@ pipeline {
                                     -w /app \
                                     sonarsource/sonar-scanner-cli \
                                     -Dsonar.sources=/var/jenkins_home/workspace/feras \
-                                    -Dsonar.language=py \
                                     -Dsonar.host.url=${SONAR_HOST_URL} \
                                     -Dsonar.token=${SONAR_TOKEN} \
-                                    
+                                    -Dsonar.sonar.projectKey=selenium-python
+
                                 """
                             }
                         }
