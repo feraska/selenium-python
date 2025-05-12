@@ -29,11 +29,11 @@ pipeline {
                                     -Dsonar.login=$SONAR_TOKEN
                                 """
                             }
-                        } catch (Exception e) {
+                         catch (Exception e) {
                             error("SonarQube analysis failed: ${e.getMessage()}")
                         }
                     }
-          //  }
+            }
         }
         }
 
