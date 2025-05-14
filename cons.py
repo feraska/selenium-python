@@ -18,7 +18,7 @@ cookieN = {
     "secure": True,
     "sameSite": "None",
 }
-url = os.getenv("SELENIUM_HOST","http://selenium-grid:4444")
+url = os.getenv("SELENIUM_HOST")
 def check_selenium_host():
     if url:
         print(f"Selenium Host is: {url}")

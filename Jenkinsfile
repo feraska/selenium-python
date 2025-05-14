@@ -59,7 +59,7 @@ pipeline {
 
         stage('Run') {
             steps {
-                sh 'docker run --rm --network jenkins-grid-network my-python-app'
+                sh 'docker run --rm -e SELENIUM_HOST=$SELENIUM_HOST --network jenkins-grid-network my-python-app'
             }
         }
 
