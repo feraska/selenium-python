@@ -11,9 +11,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 @pytest.fixture(scope="function")
 def setup_driver():
-         #check_selenium_host()
          options = Options()
-         options.add_argument("--headless")  # Run tests without UI
+         #options.add_argument("--headless")  # Run tests without UI
          options.add_argument("--no-sandbox")
          options.add_argument("--disable-dev-shm-usage")
          selenium_grid_url =  url # Change based on your container setup

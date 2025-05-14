@@ -19,8 +19,3 @@ cookieN = {
     "sameSite": "None",
 }
 url = os.getenv("SELENIUM_HOST")
-def check_selenium_host():
-    if url:
-        print(f"Selenium Host is: {url}")
-    else:
-        print("SELENIUM_HOST is not set!")
