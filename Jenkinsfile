@@ -18,6 +18,11 @@ pipeline {
             echo "SELENIUM_HOST: ${env.SELENIUM_HOST}"
         }
     }
+    stage('Check Selenium') {
+    steps {
+        sh 'curl -f ${SELENIUM_HOST}'
+    }
+}
 }
         // stage('SonarQube Analysis') {
         //     steps {
