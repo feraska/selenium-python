@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import pytest
 import os
 import time
-from cons import cookie,url,check_selenium_host
+from cons import cookie,url
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
