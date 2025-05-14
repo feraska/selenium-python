@@ -1,3 +1,4 @@
+import os
 cookie = {
     "name":"access_token",
     "value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTQzNGZmZTI1N2Q3NWQ3MTVkNTFjMiIsImlhdCI6MTc0Mzc3MzY0Nn0.1Bqn3ClrYsIIwBG4Z6czs-Kbb4KqYfa6tw4i4s3_4As",
@@ -17,4 +18,4 @@ cookieN = {
     "secure": True,
     "sameSite": "None",
 }
-url = "http://selenium-grid:4444"
+url = os.getenv("SELENIUM_HOST")

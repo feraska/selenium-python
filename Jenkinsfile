@@ -2,6 +2,7 @@ pipeline {
     agent any
      environment {
         SONAR_HOST_URL = 'http://sonarqube:9000'
+        SELENIUM_HOST = 'http://selenium-grid:4444'
         //SONAR_TOKEN = credentials('sonarqube-token') 
     }
     stages {
