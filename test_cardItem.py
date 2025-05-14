@@ -11,7 +11,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 @pytest.fixture(scope="function")
 def setup_driver():
-         check_selenium_host()
+         #check_selenium_host()
          options = Options()
          options.add_argument("--headless")  # Run tests without UI
          options.add_argument("--no-sandbox")
