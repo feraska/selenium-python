@@ -11,6 +11,14 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Verify Environment Variables') {
+    steps {
+        script {
+            echo "SONAR_HOST_URL: ${env.SONAR_HOST_URL}"
+            echo "SELENIUM_HOST: ${env.SELENIUM_HOST}"
+        }
+    }
+}
         // stage('SonarQube Analysis') {
         //     steps {
         //         withSonarQubeEnv('sonarServer') {
