@@ -2,7 +2,7 @@ pipeline {
     agent any
      environment {
         SONAR_HOST_URL = 'http://sonarqube:9000'
-        SELENIUM_HOST = 'http://selenium-grid:4444/'
+        SELENIUM_HOST = 'http://selenium-grid:4444'
         //SONAR_TOKEN = credentials('sonarqube-token') 
     }
     stages {
@@ -49,19 +49,24 @@ pipeline {
         // }
 
    
-       
+
+        stage('Debug Env') {
+            steps {
+                sh 'echo "SELENIUM_HOST=$SELENIUM_HOST"'
+    }
+    }
         stage('Build') {
             steps {
                 sh 'docker build -t my-python-app .'
                 
             }
         }
-
         stage('Run') {
             steps {
                 sh 'docker run --rm -e SELENIUM_HOST=$SELENIUM_HOST --network jenkins-grid-network my-python-app'
             }
         }
+
 
 
         
