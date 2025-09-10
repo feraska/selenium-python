@@ -15,8 +15,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up Docker Compose
         run: |
-          docker-compose -v
-          docker-compose up -d
+          docker compose up -d
       - name: Build Docker image
         run: |
           docker build -t selenium-python-test .
