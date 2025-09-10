@@ -1,0 +1,23 @@
+name: Build and Test Selenium Docker
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t selenium-python-test .
+
+      - name: Run Selenium tests
+        run: |
+          docker run --rm selenium-python-test
