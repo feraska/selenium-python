@@ -1,0 +1,11 @@
+name: Deploy Staging
+
+on:
+  push:
+   
+
+jobs:
+  call-deploy:
+    uses: ./.github/workflows/template.yml
+    with:
+      environment: "staging"
